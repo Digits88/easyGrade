@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Course{% endblock %}
+
+{% block headerdetail %}
+    {{ parent() }}
+    <meta name="theme-color" content="#3e454c">
+{% endblock %}
+
+
+{% block modulename %}Programming Fundamentals{% endblock %}
+{% block contentdetail %}
+    {{ parent() }}
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Batch</label>
+            <select class="form-control select2" style="width: 100%;">
+            {% for batchAssignment in batchAssignments %}
+                <option selected="selected"><a href="{{ path('batchassignment_show', { 'id': batchAssignment.id }) }}">{{ batchAssignment.batchid }}</a></option>
+            {% endfor %}
+            </select>
+        </div>
+    </div>
+
+
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Assignment</label>
+            <select class="form-control select2" style="width: 100%;">
+            {% for batchAssignment in batchAssignments %}
+                <option selected="selected">{{ batchAssignment.assignmentname }}</option>
+            {% endfor %}
+            </select>
+        </div>
+        <form>
+            <a href="#" class="btn btn-success">Go to Selected</a>
+        </form>
+
+
+
+    </div>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>BatchAssignment list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Batchid</th>
+                <th>Assignmentid</th>
+                <th>Actions</th>
+                <th>AssignmentName</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for batchAssignment in batchAssignments %}
+            <tr>
+                <td><a href="{{ path('batchassignment_show', { 'id': batchAssignment.id }) }}">{{ batchAssignment.id }}</a></td>
+                <td>{{ batchAssignment.batchid }}</td>
+                <td>{{ batchAssignment.assignmentid }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('batchassignment_show', { 'id': batchAssignment.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('batchassignment_edit', { 'id': batchAssignment.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+                <td>{{ batchAssignment.assignmentname }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('batchassignment_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

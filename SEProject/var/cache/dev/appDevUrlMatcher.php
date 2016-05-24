@@ -100,6 +100,203 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
+        if (0 === strpos($pathinfo, '/assignment')) {
+            // assignment_index
+            if (rtrim($pathinfo, '/') === '/assignment') {
+                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'HEAD'));
+                    goto not_assignment_index;
+                }
+
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'assignment_index');
+                }
+
+                return array (  '_controller' => 'SEPBundle\\Controller\\AssignmentController::indexAction',  '_route' => 'assignment_index',);
+            }
+            not_assignment_index:
+
+            // assignment_new
+            if ($pathinfo === '/assignment/new') {
+                if (!in_array($this->context->getMethod(), array('GET', 'POST', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'POST', 'HEAD'));
+                    goto not_assignment_new;
+                }
+
+                return array (  '_controller' => 'SEPBundle\\Controller\\AssignmentController::newAction',  '_route' => 'assignment_new',);
+            }
+            not_assignment_new:
+
+            // assignment_show
+            if (preg_match('#^/assignment/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'HEAD'));
+                    goto not_assignment_show;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'assignment_show')), array (  '_controller' => 'SEPBundle\\Controller\\AssignmentController::showAction',));
+            }
+            not_assignment_show:
+
+            // assignment_edit
+            if (preg_match('#^/assignment/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+                if (!in_array($this->context->getMethod(), array('GET', 'POST', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'POST', 'HEAD'));
+                    goto not_assignment_edit;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'assignment_edit')), array (  '_controller' => 'SEPBundle\\Controller\\AssignmentController::editAction',));
+            }
+            not_assignment_edit:
+
+            // assignment_delete
+            if (preg_match('#^/assignment/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                if ($this->context->getMethod() != 'DELETE') {
+                    $allow[] = 'DELETE';
+                    goto not_assignment_delete;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'assignment_delete')), array (  '_controller' => 'SEPBundle\\Controller\\AssignmentController::deleteAction',));
+            }
+            not_assignment_delete:
+
+        }
+
+        if (0 === strpos($pathinfo, '/batchassignment')) {
+            // batchassignment_index
+            if (rtrim($pathinfo, '/') === '/batchassignment') {
+                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'HEAD'));
+                    goto not_batchassignment_index;
+                }
+
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'batchassignment_index');
+                }
+
+                return array (  '_controller' => 'SEPBundle\\Controller\\BatchAssignmentController::indexAction',  '_route' => 'batchassignment_index',);
+            }
+            not_batchassignment_index:
+
+            // batchassignment_assignment
+            if ($pathinfo === '/batchassignment/courseassignment') {
+                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'HEAD'));
+                    goto not_batchassignment_assignment;
+                }
+
+                return array (  '_controller' => 'SEPBundle\\Controller\\BatchAssignmentController::courseassignmentAction',  '_route' => 'batchassignment_assignment',);
+            }
+            not_batchassignment_assignment:
+
+            // batchassignment_new
+            if ($pathinfo === '/batchassignment/new') {
+                if (!in_array($this->context->getMethod(), array('GET', 'POST', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'POST', 'HEAD'));
+                    goto not_batchassignment_new;
+                }
+
+                return array (  '_controller' => 'SEPBundle\\Controller\\BatchAssignmentController::newAction',  '_route' => 'batchassignment_new',);
+            }
+            not_batchassignment_new:
+
+            // batchassignment_show
+            if (preg_match('#^/batchassignment/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'HEAD'));
+                    goto not_batchassignment_show;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'batchassignment_show')), array (  '_controller' => 'SEPBundle\\Controller\\BatchAssignmentController::showAction',));
+            }
+            not_batchassignment_show:
+
+            // batchassignment_edit
+            if (preg_match('#^/batchassignment/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+                if (!in_array($this->context->getMethod(), array('GET', 'POST', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'POST', 'HEAD'));
+                    goto not_batchassignment_edit;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'batchassignment_edit')), array (  '_controller' => 'SEPBundle\\Controller\\BatchAssignmentController::editAction',));
+            }
+            not_batchassignment_edit:
+
+            // batchassignment_delete
+            if (preg_match('#^/batchassignment/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                if ($this->context->getMethod() != 'DELETE') {
+                    $allow[] = 'DELETE';
+                    goto not_batchassignment_delete;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'batchassignment_delete')), array (  '_controller' => 'SEPBundle\\Controller\\BatchAssignmentController::deleteAction',));
+            }
+            not_batchassignment_delete:
+
+        }
+
+        if (0 === strpos($pathinfo, '/course')) {
+            // course_index
+            if (rtrim($pathinfo, '/') === '/course') {
+                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'HEAD'));
+                    goto not_course_index;
+                }
+
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'course_index');
+                }
+
+                return array (  '_controller' => 'SEPBundle\\Controller\\CourseController::indexAction',  '_route' => 'course_index',);
+            }
+            not_course_index:
+
+            // course_new
+            if ($pathinfo === '/course/new') {
+                if (!in_array($this->context->getMethod(), array('GET', 'POST', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'POST', 'HEAD'));
+                    goto not_course_new;
+                }
+
+                return array (  '_controller' => 'SEPBundle\\Controller\\CourseController::newAction',  '_route' => 'course_new',);
+            }
+            not_course_new:
+
+            // course_show
+            if (preg_match('#^/course/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'HEAD'));
+                    goto not_course_show;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'course_show')), array (  '_controller' => 'SEPBundle\\Controller\\CourseController::showAction',));
+            }
+            not_course_show:
+
+            // course_edit
+            if (preg_match('#^/course/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+                if (!in_array($this->context->getMethod(), array('GET', 'POST', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'POST', 'HEAD'));
+                    goto not_course_edit;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'course_edit')), array (  '_controller' => 'SEPBundle\\Controller\\CourseController::editAction',));
+            }
+            not_course_edit:
+
+            // course_delete
+            if (preg_match('#^/course/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                if ($this->context->getMethod() != 'DELETE') {
+                    $allow[] = 'DELETE';
+                    goto not_course_delete;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'course_delete')), array (  '_controller' => 'SEPBundle\\Controller\\CourseController::deleteAction',));
+            }
+            not_course_delete:
+
+        }
+
         // sep_default_index
         if (rtrim($pathinfo, '/') === '') {
             if (substr($pathinfo, -1) !== '/') {
