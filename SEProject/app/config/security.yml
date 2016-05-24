@@ -52,7 +52,7 @@ security:
 
                 # login success redirecting options (read further below)
                 always_use_default_target_path: false
-                default_target_path:            /index
+                default_target_path:            /user
                 target_path_parameter:          _target_path
                 use_referer:                    false
 

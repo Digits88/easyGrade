@@ -2,12 +2,17 @@
 
 namespace SEPBundle\Controller;
 
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SEPBundle\Entity\User;
 use SEPBundle\Form\UserType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 /**
  * User controller.
@@ -42,7 +47,18 @@ class UserController extends Controller
     public function newAction(Request $request)
     {
         $user = new User();
-        $form = $this->createForm('SEPBundle\Form\UserType', $user);
+        //$form = $this->createForm('SEPBundle\Form\UserType', $user);
+
+
+        $form = $this->createFormBuilder($user)
+            ->add('username', TextType::class)
+            ->add('email', EmailType::class)
+            ->add('password', PasswordType::class)
+            ->add('save', SubmitType::class, array('label' => 'Create User'))
+            ->getForm();
+
+
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

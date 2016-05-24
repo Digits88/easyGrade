@@ -41,11 +41,11 @@
                     <li><a href="#">Help</a></li>
                     <li><a href="#">Settings</a></li>
                     <li class="ts-account">
-                        <a href="#"><img src="{{ asset('bundles/sep/images/ts-avatar.jpg') }}" class="ts-avatar hidden-side" alt=""> Account <i class="fa fa-angle-down hidden-side"></i></a>
+                        <a href="#"><img src="{{ asset('bundles/sep/images/ts-avatar.jpg') }}" class="ts-avatar hidden-side" alt=""> {% block authenticatedUsername %}{% endblock %} <i class="fa fa-angle-down hidden-side"></i></a>
                         <ul>
                             <li><a href="#">My Account</a></li>
                             <li><a href="#">Edit Account</a></li>
-                            <li><a href="#">Logout</a></li>
+                            <li><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -54,6 +54,7 @@
             <div class="ts-main-content">
                 <nav class="ts-sidebar">
                     <ul class="ts-sidebar-menu">
+                        {% block sidebarmenu %}
                         <li class="ts-label">Search</li>
                         <li>
                             <input type="text" class="ts-sidebar-search" placeholder="Search here...">
@@ -64,25 +65,8 @@
                             <ul>
                                 {% block courselist %}{% endblock courselist %}
                             </ul>
-
-
                         </li>
-
-
-                        <!-- Account from above -->
-                        <ul class="ts-profile-nav">
-                            <li><a href="#">Help</a></li>
-                            <li><a href="#">Settings</a></li>
-                            <li class="ts-account">
-                                <a href="#"><img src="img/ts-avatar.jpg" class="ts-avatar hidden-side" alt=""> Account <i class="fa fa-angle-down hidden-side"></i></a>
-                                <ul>
-                                    <li><a href="#">My Account</a></li>
-                                    <li><a href="#">Edit Account</a></li>
-                                    <li><a href="#">Logout</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-
+                        {% endblock sidebarmenu %}
                     </ul>
                 </nav>
 
